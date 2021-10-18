@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../App';
+import React from 'react';
 import DashboardHome from '../Components/DashboardHome';
 import NoMatch from './NoMatch';
 
 const Dashboard = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const loginToken = sessionStorage.getItem('token');
-    const loginUser = async()=>{
-        const userFromStorage = await sessionStorage.getItem('user')
-        return userFromStorage;
-    }
-    console.log(loginUser)
+    // const loggedInUser = async()=>{
+    //     const userFromStorage = await sessionStorage.getItem('user')
+    //     // console.log(userFromStorage);
+    //     return userFromStorage;
+    // }
+    // loggedInUser();
+    // console.log(loggedInUser);
+    const userFromStorage =  sessionStorage.getItem('user')
+     console.log(userFromStorage);
+
     return (
         <div>
+
             {
-                loginToken || loggedInUser.email ? <DashboardHome /> : <NoMatch />
+                userFromStorage  === "nhr.developer@gmail.com" ? <DashboardHome /> : <NoMatch />
             }
         </div>
     );

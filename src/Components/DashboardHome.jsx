@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../App';
+import React from 'react';
+
 
 const DashboardHome = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    
 
     return (
         <div>

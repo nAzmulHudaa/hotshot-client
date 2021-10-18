@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,11 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
 import NoMatch from '../pages/NoMatch';
 
 const Customers = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const history = useHistory();
     const [customers, setCustomers] = useState([]);
@@ -30,12 +28,17 @@ const Customers = () => {
     const handleCustomer = (id) => {
         history.push(`/customers/${id}`);
     }
-
-    const loginToken = sessionStorage.getItem('token');
+    const loggedInUser = async()=>{
+        const userFromStorage = await sessionStorage.getItem('user')
+        return userFromStorage;
+    }
+    // console.log(loggedInUser)
+    
+   
     return (
         <div>
             {
-                loginToken || loggedInUser.email  ? (
+                 loggedInUser.email  ? (
                     <div>
                         <b> Customers Details of the Company</b>
                         <TableContainer component={Paper}>

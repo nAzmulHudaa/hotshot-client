@@ -1,18 +1,12 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import db from '../firebase.config';
-import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
 
 const SingleCustomer = () => {
     const [singleCustomer, setSingleCustomer] = useState([]);
     const { id } = useParams();
-// check if the user logged in
-
-
-
 
     useEffect(() => {
         db.collection("customers").get()
@@ -22,19 +16,16 @@ const SingleCustomer = () => {
                         setSingleCustomer(customer.data());
                     }
                 })
-
             })
             .catch(err => {
                 console.log(err);
             })
 
-
     }, [])
 
 
 
-
-    console.log(singleCustomer)
+    // console.log(singleCustomer)
 
 
 

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  
 } from "react-router-dom";
-import { createContext } from 'react';
-
 import Customers from './Components/Customers';
 import Layout from './Layout/Layout';
 import Home from './pages/Home';
@@ -16,20 +14,13 @@ import Orders from './Components/Orders';
 import SingleOrder from './Components/SingleOrder';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import * as firebase from 'firebase/app';
 
-
-export const UserContext = createContext();
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
   
 
-  console.log(loggedInUser);
-
-
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+ 
       <Router>
         <Switch>
           <Route path='/dashboard/customers'>
@@ -72,7 +63,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </UserContext.Provider>
+   
   );
 }
 

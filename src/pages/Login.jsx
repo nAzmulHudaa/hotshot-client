@@ -1,13 +1,11 @@
 import React from 'react';
 import * as firebase from 'firebase/app';
 import "firebase/auth";
-import { useContext } from 'react';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
+
 
 const Login = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
     let history = useHistory();
 
 
@@ -17,7 +15,6 @@ const Login = () => {
             .signInWithPopup(provider)
             .then((result) => {
                 var credential = result.credential;
-                var token = credential.accessToken;
                 const { displayName, photoURL, email } = result.user;
                 const signedInUser = {
                     isSignedIn: true,
@@ -25,11 +22,9 @@ const Login = () => {
                     email: email,
                     img: photoURL
                 }
-                setLoggedInUser(signedInUser);
                 storeAuthToken();
+                sessionStorage.setItem('user', signedInUser.email)
                 history.push('/dashboard')
-                sessionStorage.setItem('user',signedInUser)
-            
 
             }).catch((error) => {
                 var errorCode = error.code;
@@ -41,15 +36,15 @@ const Login = () => {
             });
     }
 
-    const storeAuthToken=()=>{
-        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-            sessionStorage.setItem('token',idToken);
-           
-          }).catch(function(error) {
-            
-          });
+    const storeAuthToken = () => {
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+            sessionStorage.setItem('token', idToken);
+
+        }).catch(function (error) {
+
+        });
     }
-    
+
 
     return (
 

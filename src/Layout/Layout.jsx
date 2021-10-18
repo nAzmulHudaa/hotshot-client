@@ -16,11 +16,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import logo from '../../src/assets/images/Artboard-1.png';
-import Avatar from '@mui/material/Avatar';
 import {  BackupTableOutlined, PeopleOutline, SubjectOutlined } from '@mui/icons-material';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
-import {UserContext} from '../App';
+
 
 const drawerWidth = 240;
 
@@ -95,7 +93,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Layout = ({ children }) => {
     let history = useHistory();
     let location = useLocation();
-    const [loggedInUser,setLoggedInUser] = useContext(UserContext);
+    const loggedInUser = async()=>{
+        const userFromStorage = await sessionStorage.getItem('user')
+        return userFromStorage;
+    }
+    console.log(loggedInUser)
     const menuItems = [
         {
             text: 'Home',

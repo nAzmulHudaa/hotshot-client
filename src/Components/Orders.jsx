@@ -7,14 +7,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
 import NoMatch from '../pages/NoMatch';
 
 
 
 
 const Orders = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   
     const history = useHistory();
     const [orders, setOrders] = useState([]);
     useEffect(() => {
@@ -26,11 +25,17 @@ const Orders = () => {
     const handleOrder = (id) => {
         history.push(`/orders/${id}`);
     }
-    const loginToken = sessionStorage.getItem('token');
+
+    const loggedInUser = async()=>{
+        const userFromStorage = await sessionStorage.getItem('user')
+        return userFromStorage;
+    }
+    console.log(loggedInUser)
+    
     return (
         <div>
             {
-                loginToken || loggedInUser.email  ? (
+                loggedInUser.email  ? (
                     <div >
                         <b> Orders Details of the Company</b>
                         <div >
