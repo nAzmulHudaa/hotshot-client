@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as firebase from 'firebase/app';
 import "firebase/auth";
-import firebaseApp from '../firebase.config';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +9,6 @@ import { UserContext } from '../App';
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     let history = useHistory();
-
 
 
     const handleGoogleSignIn = () => {
@@ -30,6 +28,7 @@ const Login = () => {
                 setLoggedInUser(signedInUser);
                 storeAuthToken();
                 history.push('/dashboard')
+                sessionStorage.setItem('user',signedInUser)
             
 
             }).catch((error) => {

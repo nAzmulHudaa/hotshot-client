@@ -6,6 +6,11 @@ import NoMatch from './NoMatch';
 const Dashboard = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const loginToken = sessionStorage.getItem('token');
+    const loginUser = async()=>{
+        const userFromStorage = await sessionStorage.getItem('user')
+        return userFromStorage;
+    }
+    console.log(loginUser)
     return (
         <div>
             {
